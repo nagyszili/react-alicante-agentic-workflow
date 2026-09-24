@@ -20,10 +20,12 @@ function session(overrides: Partial<Session> = {}): Session {
 }
 
 describe("SpeakerCard", () => {
-  it("shows the speaker's name", () => {
+  it("shows the speaker's name as a level-2 heading", () => {
     render(<SpeakerCard speaker="Marta Fernandez" sessions={[session()]} />);
 
-    expect(screen.getByText("Marta Fernandez")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Marta Fernandez" }),
+    ).toBeInTheDocument();
   });
 
   it("lists each session's title and start time", () => {
@@ -38,9 +40,9 @@ describe("SpeakerCard", () => {
     );
 
     expect(screen.getByText("Opening Keynote")).toBeInTheDocument();
-    expect(screen.getByText("09:00")).toBeInTheDocument();
+    expect(screen.getByText("· 09:00")).toBeInTheDocument();
     expect(screen.getByText("Closing Remarks")).toBeInTheDocument();
-    expect(screen.getByText("17:00")).toBeInTheDocument();
+    expect(screen.getByText("· 17:00")).toBeInTheDocument();
   });
 
   it("links each session to its session page", () => {
